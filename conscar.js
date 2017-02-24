@@ -1,9 +1,9 @@
 function cons( x, y)
 {
-   return function(x){
-      if( x==='car')
+   return function(z){
+      if( z==='car')
           return x;
-      if( x === 'cdr')
+      if( z === 'cdr')
          return y;
    }
 }
