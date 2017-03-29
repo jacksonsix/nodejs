@@ -1,5 +1,5 @@
 
-function Wire(name){
+export function Wire(name){
 	this.name = name;
 	console.log('wire ok');
 }
