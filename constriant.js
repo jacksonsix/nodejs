@@ -27,8 +27,9 @@ function Adder(a,b,c){
 exports.Const = function (v,wire){
 	this.v = v;
 	this.wire = wire;
+	this.wire.setValue(v);
 	this.getValue = function(){ return this.v;}
-	console.log('const ok ' + wire.name);
+	console.log('const ' + wire.name);
 }
 
 function CF(c,f){
