@@ -1,15 +1,18 @@
 
 exports.Wire = function (name){
 	this.name = name;
-	console.log('wire ok');
+	
+	this.getValue = function(){ return this.value; }
+	this.setValue = function(value) { this.value = value;}
+	console.log('wire ' + this.name);
 }
 
 
-function Mult(a,b,c){
+exports.Mult = function (a,b,c){
 	this.a = a;
 	this.b =b;
 	this.c =c;
-	console.log('mult ok');
+	console.log('mult ');
 	
 }
 
@@ -21,9 +24,10 @@ function Adder(a,b,c){
 	
 }
 
-function Const(v,wire){
+exports.Const = function (v,wire){
 	this.v = v;
 	this.wire = wire;
+	this.getValue = function(){ return this.v;}
 	console.log('const ok ' + wire.name);
 }
 
