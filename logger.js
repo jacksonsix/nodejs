@@ -23,7 +23,9 @@ function write(cmd){
 
 exports.log = function(cmd){
   db().push(cmd);
-  write(cmd);
+  var l = '';
+  db().forEach(function(e) { l = l + e + '\n'; })
+  write(l);
 }
 
 
