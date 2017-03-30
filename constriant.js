@@ -32,6 +32,40 @@ exports.Const = function (v,wire){
 	console.log('const ' + wire.name);
 }
 
+exports.Mult = function(a,b,c){
+	this.a = a;
+	this.b = b;
+	this.c = c;
+	
+	this.a.add(this);
+	this.b.add(this);
+	this.c.add(this);
+	
+	this.handleChange = function(wire){ 
+		let source = wire.name;
+		switch(source){
+		case 'a' :
+			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
+			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() / this.a.getValue()); break;}
+			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() * this.b.getValue()); break;}
+		case 'b':
+			if(this.a.getValue() ==='null' && this.c.getValue() ==='null') break;
+			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() / this.b.getValue()); break;}
+			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() * this.b.getValue()); break;}
+		case 'c':
+			if(this.a.getValue() ==='null' && this.b.getValue() ==='null') break;
+			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() / this.b.getValue()); break;}
+			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() / this.a.getValue()); break;}
+		default:
+		  break;
+	    }
+		
+	}
+	console.log('multer ok');
+	
+}
+
+
 function CF(c,f){
 	this.c = c;
 	this.f = f;
