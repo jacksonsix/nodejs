@@ -91,6 +91,16 @@ exports.Mult = function(a,b,c){
 	
 }
 
+exports.Const = function (v,wire){
+	this.v = v;
+	this.wire = wire;
+	this.wire.setValue(v);
+	// bug, wire can setValue its value
+	
+	console.log('const ok ' + wire.name);
+}
+
+
 //var a = new Wire('a');
 //var b = new Wire('b');
 //var c = new Wire('c');
