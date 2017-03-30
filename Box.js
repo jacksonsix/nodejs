@@ -15,10 +15,12 @@ exports.Wire = function (name){
 	    console.log(cmd);	
 	    logger.log(cmd); 	
 	    var that = this;	
-	    this.val = val;
-		this.list.forEach(function(box){
+	    this.val = val;		
+		
+	    this.list.forEach(function(box){
+		        if(box === that) return;
 			box.handleChange(that);
-		})	    
+	     })	    
 	};
 	this.forget = function() {this.val = 'null';};
 	console.log('wire ok');
