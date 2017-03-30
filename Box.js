@@ -25,7 +25,8 @@ exports.Wire = function (name){
 }
 
 
-exports.Adder = function (a,b,c){
+exports.Adder = function (name,a,b,c){
+	this.name = name;
 	this.a = a;
 	this.b = b;
 	this.c = c;
@@ -58,7 +59,8 @@ exports.Adder = function (a,b,c){
 	console.log('adder ok');
 	
 }
-exports.Mult = function(a,b,c){
+exports.Mult = function(name,a,b,c){
+	this.name = name;
 	this.a = a;
 	this.b = b;
 	this.c = c;
