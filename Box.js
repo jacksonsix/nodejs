@@ -10,12 +10,12 @@ exports.Wire = function (name){
 	
 	this.setValue = function(val){ 
 	    if(val === this.val) return;
+	    console.log('setvalue ' + this.name + ' ' + val);	
 	    var that = this;	
 	    this.val = val;
 		this.list.forEach(function(box){
 			box.handleChange(that);
-		})
-	     console.log('setvalue ' + this.name + ' ' + val);	
+		})	    
 	};
 	this.forget = function() {this.val = 'null';};
 	console.log('wire ok');
