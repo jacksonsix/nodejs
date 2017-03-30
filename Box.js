@@ -54,8 +54,8 @@ exports.Adder = function (a,b,c){
 }
 
 
-var a = new Wire('a');
-var b = new Wire('b');
-var c = new Wire('c');
+//var a = new Wire('a');
+//var b = new Wire('b');
+//var c = new Wire('c');
 
-var box = new Adder(a,b,c);
+//var box = new Adder(a,b,c);
