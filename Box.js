@@ -14,6 +14,7 @@ exports.Wire = function (name){
 		this.list.forEach(function(box){
 			box.handleChange(this);
 		})
+	     console.log('set value' + val);	
 	};
 	this.forget = function() {this.val = 'null';};
 	console.log('wire ok');
@@ -31,6 +32,7 @@ exports.Adder = function (a,b,c){
 	
 	this.handleChange = function(wire){ 
 		var source = wire.name;
+		console.log('source is ' + source);
 		switch(source){
 		case 'a' :
 			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
