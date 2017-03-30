@@ -15,7 +15,7 @@ exports.Wire = function (name){
 		this.list.forEach(function(box){
 			box.handleChange(that);
 		})
-	     console.log('set value' + val);	
+	     console.log('setvalue ' + this.name + ' ' + val);	
 	};
 	this.forget = function() {this.val = 'null';};
 	console.log('wire ok');
