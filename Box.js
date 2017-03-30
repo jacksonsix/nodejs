@@ -10,9 +10,10 @@ exports.Wire = function (name){
 	
 	this.setValue = function(val){ 
 	    if(val === this.val) return;
+	    var that = this;	
 	    this.val = val;
 		this.list.forEach(function(box){
-			box.handleChange(this);
+			box.handleChange(that);
 		})
 	     console.log('set value' + val);	
 	};
