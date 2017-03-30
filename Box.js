@@ -19,6 +19,7 @@ exports.Wire = function (name){
 		
 	    this.list.forEach(function(box){
 		        if(box === that) return;
+		        console.log('inform ' + box.name);
 			box.handleChange(that);
 	     })	    
 	};
