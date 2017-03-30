@@ -65,7 +65,7 @@ exports.Mult = function(a,b,c){
 	this.c.add(this);
 	
 	this.handleChange = function(wire){ 
-		let source = wire.name;
+		var source = wire.name;
 		switch(source){
 		case 'a' :
 			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
