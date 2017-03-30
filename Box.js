@@ -74,6 +74,7 @@ exports.Mult = function(name,a,b,c){
 	
 	this.handleChange = function(wire){ 
 		var source = wire.name;
+		console.log('mult source is ' + source);
 		switch(source){
 		case 'a' :
 			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
