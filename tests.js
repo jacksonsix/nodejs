@@ -17,3 +17,5 @@ var m2 = new w.Mult('m2',w3,w4,w2);
 
 const c32 = new w.Const(32,w5);
 var adder = new w.Adder('add1',w4,w5,f);
+
+c.setValue(9);
