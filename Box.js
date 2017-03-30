@@ -42,15 +42,15 @@ exports.Adder = function (name,a,b,c){
 		var source = wire.name;
 		console.log('source is ' + source);
 		switch(source){
-		case 'a' :
+		case this.a.name :
 			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
 			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() - this.a.getValue()); break;}
 			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() + this.b.getValue()); break;}
-		case 'b':
+		case this.b.name:
 			if(this.a.getValue() ==='null' && this.c.getValue() ==='null') break;
 			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() - this.b.getValue()); break;}
 			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() + this.b.getValue()); break;}
-		case 'c':
+		case  this.c.name:
 			if(this.a.getValue() ==='null' && this.b.getValue() ==='null') break;
 			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() - this.b.getValue()); break;}
 			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() - this.a.getValue()); break;}
@@ -76,15 +76,15 @@ exports.Mult = function(name,a,b,c){
 		var source = wire.name;
 		console.log('mult source is ' + source);
 		switch(source){
-		case 'a' :
+		case this.a.name :
 			if(this.b.getValue() ==='null' && this.c.getValue() ==='null') break;
 			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() / this.a.getValue()); break;}
 			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() * this.b.getValue()); break;}
-		case 'b':
+		case this.b.name:
 			if(this.a.getValue() ==='null' && this.c.getValue() ==='null') break;
 			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() / this.b.getValue()); break;}
 			if(this.c.getValue() ==='null') { c.setValue(this.a.getValue() * this.b.getValue()); break;}
-		case 'c':
+		case this.c.name:
 			if(this.a.getValue() ==='null' && this.b.getValue() ==='null') break;
 			if(this.a.getValue() ==='null') { a.setValue(this.c.getValue() / this.b.getValue()); break;}
 			if(this.b.getValue() ==='null') { b.setValue(this.c.getValue() / this.a.getValue()); break;}
