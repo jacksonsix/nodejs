@@ -1,3 +1,4 @@
+const logger = require('./logger.js');
 
 exports.Wire = function (name){
 	this.name = name;
@@ -10,7 +11,9 @@ exports.Wire = function (name){
 	
 	this.setValue = function(val){ 
 	    if(val === this.val) return;
-	    console.log('setvalue ' + this.name + ' ' + val);	
+	    var cmd = 'setvalue ' + this.name + ' ' + val;
+	    console.log(cmd);	
+	    logger.log(cmd); 	
 	    var that = this;	
 	    this.val = val;
 		this.list.forEach(function(box){
