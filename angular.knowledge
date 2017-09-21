@@ -1,0 +1,16 @@
+1. custome directive can use like this , as element
+<div customeDirct >
+or 
+<customeDirct></customDrict>
+
+
+2 once-class
+only init once for some class, like class init in Java
+
+3. $compile 
+comile string to a dom element
+
+inside link: function(scope,element,attrs)
+var linkFn = $compile('<div>' + string +'</div>' );
+var newElement = linkFn(scope);
+element.append(newElement);
