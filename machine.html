@@ -1,0 +1,97 @@
+<html>
+<head> </head>
+<body>
+
+<script>
+
+// parse list language
+//(a b c (d e ))
+
+
+var sentence ='(assign t (reg a))';
+var open =['('];
+var close =[')'];
+var seperator =['(', ')', ' '];
+var operator = ['assign','test'];
+
+var stack =[];
+
+function getNextToken(){
+    if(sentence.length ==0) return null;
+	
+    if(sentence[0] === '('){
+	    sentence.shift();
+	    reutrn '(';
+	}
+	else if(sentence[0] === ')'){
+		sentence.shift();
+		return ')';
+	}else {
+	   var word ='';
+		while(sentence[0] !== ' '){
+		    word += sentence[0];
+			sentence.shift();
+		}
+		// eat up space
+		while(sentence.length >0 && sentence[0] ===' '){
+			sentence.shift();			
+		}
+		
+		return word;	
+	}	
+}
+
+function parse(){
+    do{
+			var token = getNextToken();
+			if(token ==='('){
+			   // push to stack
+			   // the first token is operator
+			   var obj = {
+								 type:'open', 
+								 val :'('
+								};
+			   stack.push(obj);
+			   
+			} else if(token=')'){
+			   // begin to pop until operator, close
+			   // then  apply operator on operands
+			   var out = stack.pop();
+			   var proc = [];
+			   while(out !== '('){		
+					proc.push(out);
+					out = stack.pop();
+			   }
+			   var result = applyv(proc);
+			   stack.push(result);
+			   
+			} else{
+				var obj = {
+					type:'word',
+					val:token
+				};
+				stack.push(obj);
+			}
+    }while(token != null)
+
+    console.log('end of file');	
+}
+
+
+function  applyv(proc){
+     // pop out operator, 
+	   var op = proc.pop();
+	   var clause = op;
+	   if(op ==='assgin'){
+			 console.log('assign');
+	   }
+	   while(proc.length>0){
+	      clause = clause + ' ' + proc.pop();
+	   }
+	   return clause;	   
+}
+
+
+</script>
+</body>
+</html>
