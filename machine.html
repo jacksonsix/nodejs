@@ -17,24 +17,29 @@ var operator = ['assign','test'];
 var stack =[];
 
 function getNextToken(){
-    if(sentence.length ==0) return null;
+	// eat up space
+	while(sentence.length >0 && sentence[0] ===' '){
+			 sentence = sentence.substring(1);
+	}
 	
+    if(sentence.length ==0) return null;
+
     if(sentence[0] === '('){
-	    sentence.shift();
-	    reutrn '(';
+	    sentence = sentence.substring(1);
+	    return '(';
 	}
 	else if(sentence[0] === ')'){
-		sentence.shift();
+		 sentence = sentence.substring(1);
 		return ')';
 	}else {
 	   var word ='';
-		while(sentence[0] !== ' '){
-		    word += sentence[0];
-			sentence.shift();
-		}
-		// eat up space
-		while(sentence.length >0 && sentence[0] ===' '){
-			sentence.shift();			
+
+		 if(sentence.length ==0) return null;
+		 
+		while(sentence[0] !== ' ' && sentence[0] !=='('  && sentence[0] !==')'){
+		    if(sentence.length ==0) break;
+		    word += sentence[0];			
+			 sentence = sentence.substring(1);
 		}
 		
 		return word;	
@@ -42,18 +47,20 @@ function getNextToken(){
 }
 
 function parse(){
+    debugger;
+	var token;
+	var i =0;
     do{
-			var token = getNextToken();
+			token = getNextToken();
+			if(token == null) break;
+			
 			if(token ==='('){
 			   // push to stack
 			   // the first token is operator
-			   var obj = {
-								 type:'open', 
-								 val :'('
-								};
-			   stack.push(obj);
+			 
+			   stack.push(token);
 			   
-			} else if(token=')'){
+			} else if(token===')'){
 			   // begin to pop until operator, close
 			   // then  apply operator on operands
 			   var out = stack.pop();
@@ -65,14 +72,11 @@ function parse(){
 			   var result = applyv(proc);
 			   stack.push(result);
 			   
-			} else{
-				var obj = {
-					type:'word',
-					val:token
-				};
-				stack.push(obj);
+			} else{				
+				stack.push(token);
 			}
-    }while(token != null)
+			i++;
+    }while(token != null && i<30)
 
     console.log('end of file');	
 }
@@ -91,6 +95,7 @@ function  applyv(proc){
 	   return clause;	   
 }
 
+parse();
 
 </script>
 </body>
