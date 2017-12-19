@@ -57,6 +57,7 @@ function Machine_base(){
 // Assembler 
 function asseble(controller_text,machine){
 	var commands = read_controller_text(controller_text);	
+	var analyzer = analyze(commands);
 	// install libs to machine
 	var libs = setup();	
 	machine.install_libs(libs);
@@ -470,6 +471,36 @@ function setup(){
 	return env;
 }
 
+function analyze(instructions){
+	result = {};
+	result.insts = 	instructions.sort(function(a,b){
+								  if( a.type < b.type) return -1;
+								  else if (a.type > b.type) return 1;
+								  else return 0;
+							});
+	result.entries = instructions.filter(function(inst){
+		 return inst.type === 'goto';
+	}).map(function(item){
+		 return item.dest.name;
+	});			
+   	
+	result.onstacks = instructions.filter(function(inst){
+		return inst.type ==='save';
+	}).map(function(item){
+		return item.reg;
+	});
+	
+	result.sources =  instructions.filter(function(inst){
+		return inst.type ==='assign';
+	}).sort(function(a,b){
+		if(a.dest.name < b.dest.name ) return -1;
+		else if (a.dest.name > b.dest.name) return 1;
+		else return 0;
+	});
+	
+	return result;
+}
+
 ////////////////////////////////////////////////////////       test part     //////////////////////////////////////////////////////////////////
 
 function testproc(){
@@ -529,10 +560,11 @@ function test_machine(){
 	console.log('machine setup!');
 	m.set_reg('val',1);
 	m.set_reg('n',6);
-
+    
 	asseble(controller_text,m);
 	m.start();
 	
 	  console.log('Machine finish!');
 	  console.log('result  is ' + m.get_reg('val'));
 }
+
