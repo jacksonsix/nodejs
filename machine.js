@@ -17,6 +17,8 @@ function Machine_base(){
   this.ops = [];
   this.controller_text ='';
   this.libs = {};
+  this.counting = 0;
+  this.trace = true;
   
   this.get_reg = function get_reg(reg){	 
 	  return this.registers[reg];
@@ -30,10 +32,14 @@ function Machine_base(){
 	  console.log('Machine started!');
 	  this.pc = this.ops[this.pcindex];
 	  var i = 0;
-	  while(this.pc != null && i < 200){
-	    console.log(this.pc.type); 	
+	  while(this.pc != null && i < 200){	   	
 		i++;
+		if(this.trace){
+			//print pc command
+			console.log(this.pc.cmdtext);
+		}
 		this.pc.func();
+		this.counting++;
 	  } 
 
   }
@@ -41,8 +47,7 @@ function Machine_base(){
   this.get_stack = function getstack(){ return this.stack;}
   this.get_operations = function getops(){return this.ops;}	
   this.set_flag = function setflag(value){ this.falg = value;}
-  this.advance_pc = function advance_pc(machine){
-	                              console.log('pc advanced');
+  this.advance_pc = function advance_pc(machine){	                           
 								  this.pcindex += 1;
 								  this.pc =  this.ops[this.pcindex];
                              }	
@@ -50,7 +55,8 @@ function Machine_base(){
 	                                this.libs = libs;
                                }							 
 						 
-							 
+   this.printcounting = function(){ return this.counting;}	
+   this.resetcounting = function(){  this.counting = 0; }   
 }
 
 
@@ -129,9 +135,11 @@ function read_controller_text(controller_text){
 		// check is label or inst
 		if(isLabel(line)){			
 			var label = make_label(line);
+			label.cmdtext = line;
 			commands.push(label);
 		}else{
 			var inst =  gen(line);
+			inst.cmdtext = line;
 			commands.push(inst);		
 		}
 	}
@@ -471,7 +479,8 @@ function setup(){
 	return env;
 }
 
-function analyze(instructions){
+function analyze(cmds){
+	var instructions = cmds.slice();
 	result = {};
 	result.insts = 	instructions.sort(function(a,b){
 								  if( a.type < b.type) return -1;
@@ -567,4 +576,3 @@ function test_machine(){
 	  console.log('Machine finish!');
 	  console.log('result  is ' + m.get_reg('val'));
 }
-
