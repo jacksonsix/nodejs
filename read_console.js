@@ -1,9 +1,7 @@
 
-down vote
-accepted
-you can't do a "while(done)" loop because that would require blocking on input, something node.js doesn't like to do.
+//you can't do a "while(done)" loop because that would require blocking on input, something node.js doesn't like to do.
 
-Instead set up a callback to be called each time something is entered:
+//Instead set up a callback to be called each time something is entered:
 
 var stdin = process.openStdin();
 
@@ -17,7 +15,7 @@ stdin.addListener("data", function(d) {
   
   
   
-  2////////////////////
+  //2////////////////////
   var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('guess> ');
@@ -29,7 +27,7 @@ rl.on('line', function(line) {
     process.exit(0);
 });
 
-3///////////////
+//3///////////////
 
 const readline = require('readline');
 
