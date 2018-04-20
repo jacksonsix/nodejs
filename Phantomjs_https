@@ -1,0 +1,36 @@
+var webPage = require('webpage');
+var page = webPage.create();
+
+phantom.addCookie({
+  'name'     : 'Valid-Cookie-Name',   /* required property */
+  'value'    : 'Valid-Cookie-Value',  /* required property */
+  'domain'   : 'localhost',
+  'path'     : '/foo',                /* required property */
+  'httponly' : true,
+  'secure'   : false,
+  'expires'  : (new Date()).getTime() + (1000 * 60 * 60)   /* <-- expires in 1 hour */
+});
+
+
+------
+
+page.onResourceRequested = function(request) {
+  console.log('Request ' + JSON.stringify(request, undefined, 4));
+};
+page.onResourceReceived = function(response) {
+  console.log('Receive ' + JSON.stringify(response, undefined, 4));
+};
+page.open(url);
+
+
+-------------------
+
+By collecting the data and reformatting it, another example, netsniff.js, 
+exports the network traffic in HAR format. Use HAR viewer to visualize the result and get the waterfall diagram.
+
+
+-------------------------
+page.customHeaders = {
+  "x-citiportal-loginid": "oneperson",
+  
+};
