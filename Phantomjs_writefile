@@ -1,3 +1,6 @@
+phantomjs.exe file_to_run.js > my_log.txt
+
+------------------
 You can override original console.log function, take a look at this :
 
 Object.defineProperty(console, "toFile", {
