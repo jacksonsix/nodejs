@@ -1,0 +1,32 @@
+You can override original console.log function, take a look at this :
+
+Object.defineProperty(console, "toFile", {
+    get : function() {
+        return console.__file__;
+    },
+    set : function(val) {
+        if (!console.__file__ && val) {
+            console.__log__ = console.log;
+            console.log = function() {
+                var fs = require('fs');
+                var msg = '';
+                for (var i = 0; i < arguments.length; i++) {
+                    msg += ((i === 0) ? '' : ' ') + arguments[i];
+                }
+                if (msg) {
+                    fs.write(console.__file__, msg + '\r\n', 'a');
+                }
+            };
+        }
+        else if (console.__file__ && !val) {
+            console.log = console.__log__;
+        }
+        console.__file__ = val;
+    }
+});
+
+console.log('this will go to console');
+console.toFile = 'test.txt';
+console.log('this will go to the test.txt file');
+console.toFile = '';
+console.log('this will again go to the console');
