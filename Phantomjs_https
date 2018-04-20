@@ -31,6 +31,6 @@ exports the network traffic in HAR format. Use HAR viewer to visualize the resul
 
 -------------------------
 page.customHeaders = {
-  "x-citiportal-loginid": "oneperson",
+  "x-loginid": "oneperson",
   
 };
