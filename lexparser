@@ -1,0 +1,103 @@
+<html>
+<head></head>
+<body>
+<script src='lexparser.js'>
+
+</script>
+
+<script>
+var klist =[];
+var r =[];
+klist = prep_knowledge(Ta,r);
+var result =[];
+var sentence1 = construct(input2,result);
+console.log(sentence1);
+</script>
+</body>
+</html>
+
+///////////////
+/// knowledge into data
+var knowledge =[];
+
+var Tb = {name:'Tb',
+                children: ['T1','T2']};
+var Tc = {name:'Tc',
+                children:['T3']};
+var  Ta ={name:'Ta',
+                children: [Tb, '$']};
+				
+knowledge.push(Ta);
+knowledge.push(Tb);
+knowledge.push(Tc);
+
+
+var input1 = ['T1','T2'];
+var input2 =['T1','T2','T3'];
+
+
+function prep_knowledge(){
+	var klist=[];
+	for(var i=0;i<knowledge.length;i++){
+		var t =[];
+		serialize(knowledge[i],t);
+		klist.push({name:knowledge[i].name,
+		                  rule:t});
+	}
+	return klist;
+}
+
+function construct(input,result){
+	if(input == null || input.length==0) return result;
+	var sklist = possible_know(input[0],klist);
+	var longest =0; // break tie
+	var rule_no =0;
+	 for(var i=0;i<sklist.length;i++){
+		var w = match_len(sklist[i],input);
+		 if(w > longest){
+			 longest = w;
+			 rule_no = i;
+		 }
+	 }
+	 // found  the rule.
+	 // apply the rule
+	 result.push(sklist[rule_no].name);
+	 var ninput = input.slice(longest);
+	 return construct(ninput,result);
+}
+
+function match_len(rule,input){
+	var len =0;
+	var rul = rule.rule;
+	for(var i=0;i<rul.length;i++){
+		if(rul[i] == input[i]){
+			len++;
+		}else{
+			len =0;
+			break;
+		}
+	}
+	return len;
+}
+
+function possible_know(token,klist){
+	return klist.filter(function(kk){
+		var rul = kk.rule;
+		if(rul[0] == token) return true;
+		else return false;
+	});
+	
+}
+
+function serialize(tree,out){
+	for(var i=0; i<tree.children.length;i++){
+		var c = tree.children[i];
+		if(typeof c.name !== 'undefined'){
+			serialize(c,out);
+		}else{
+			out.push(c);
+		}
+	}
+}
+
+
