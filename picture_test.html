@@ -1,0 +1,94 @@
+<html>
+<head>
+<style>
+table, th, td {
+   border: 1px solid black;
+}
+
+td{
+	height: 20px;
+	width: 20px;
+}
+</style>
+</head>
+<body>
+
+<button  onClick=savepicture()>save picture</button>
+<div id='log'> </div>
+<script src="advanced.js"></script>
+
+
+<table id="paint">
+</table>
+
+<script src="picture.js">
+
+</script>
+<script>
+
+initTable(dots.width,dots.height);
+var start ={};
+start.x =0.3;
+start.y = 0;
+var end ={};
+end.x = 0;
+end.y = 0.8;
+var end2 ={};
+end2.x = 0.8;
+end2.y = 0.8;
+
+
+var lines=[];
+lines.push(makeLine(start,end));
+lines.push(makeLine(start,end2));
+
+var ss = writestring(pointsToMatrix(linetoPt(start,end)));
+var dd = readstring(ss);
+var ss1 = writestring(dd);
+var dd1 = readstring(ss1);
+
+var withFrame = paintLinesinFrame(lines);
+var eraseFrame = eraseLinesinFrame(lines);
+
+var testf = makeFrame(makeVector(0,0), makeVector(1,0),makeVector(0,1));
+//withFrame(testf);
+
+//var testf1 = makeFrame(makeVector(0,1), subVect(makeVector(1,1), makeVector(0,1)),subVect(makeVector(0,0), makeVector(0,1)));
+//var map = frameMap(testf1);
+//paintTable(drawPoints(linetoPt(map(start),map(end))));
+//var ups = upsidedown(withFrame);
+//var ups = rotate90(rotate90(withFrame));
+//var ups = shrinkToUpper(withFrame);
+var ups0 = beside(withFrame,withFrame);
+var ups1 = beside(eraseFrame,eraseFrame);
+var ups2 = below(withFrame,withFrame);
+var ups3 = below(eraseFrame,eraseFrame);
+//ups(testf);
+//withFrame(testf1);
+
+var time = timing();
+var  t0 ={
+	proc:function(){ups0(testf);},
+	num: 0
+};
+var t1 ={
+	proc:function(){ups1(testf);},
+	num: 2
+};
+var t2 ={
+	proc:function(){ups2(testf);},
+	num: 4
+};
+var t3 ={
+	proc:function(){ups3(testf);},
+	num: 8
+};
+time.timing.push(t0);
+time.timing.push(t1);
+time.timing.push(t2);
+time.timing.push(t3);
+time.executer(time.timing,0,true);
+</script>
+
+</body>
+</html>
