@@ -70,7 +70,7 @@ function paintLinesinFrame(lines){
 		lines.forEach(function(line){
 			let start = getstart(line);
 			let end = getend(line);
-			paintTable(drawPoints(linetoPt(map(start),map(end))));
+			paintTable(pointsToMatrix(linetoPt(map(start),map(end))));
 		});
 	}
 }
@@ -81,7 +81,7 @@ function eraseLinesinFrame(lines){
 		lines.forEach(function(line){
 			let start = getstart(line);
 			let end = getend(line);
-			eraseTable(erasePonts(linetoPt(map(start),map(end))));
+			eraseTable(pointsToMatrix(linetoPt(map(start),map(end))));
 		});
 	}
 }
@@ -145,9 +145,6 @@ function pointsToMatrix(pts){
   return init;
 }
 
-function drawPoints(pts){
-  paintTable(pointsToMatrix(pts));
-}
 function erasePonts(pts){
 	eraseTable(pointsToMatrix(pts));
 }
