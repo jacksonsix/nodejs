@@ -318,14 +318,8 @@ function timing(){
 		for(var i=0;i<timing.length;i++){
 			var evt = timing[i];
 			if(evt.proc != null){ 
-					var delay;
-					var lastevt =timing[i-1];
-					if(typeof lastevt ==='undefined'){
-						delay = evt.num ;
-					}else{
-						delay = evt.num - lastevt.num;
-					}				
-					setTimeout(evt.proc,delay*1000);			
+					var 	delay = evt.num -  timing[0].num;								
+					setTimeout(evt.proc,delay*100);			
 			}
 			console.log(i);	
 			}
