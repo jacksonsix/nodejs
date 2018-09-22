@@ -47,24 +47,24 @@ var dd = readstring(ss);
 var ss1 = writestring(dd);
 var dd1 = readstring(ss1);
 
-var withFrame = paintLinesinFrame(lines);
+var paintFrame = paintLinesinFrame(lines);
 var eraseFrame = eraseLinesinFrame(lines);
 
 var testf = makeFrame(makeVector(0,0), makeVector(1,0),makeVector(0,1));
-//withFrame(testf);
-
+paintFrame(testf);
+//eraseFrame(testf);
 //var testf1 = makeFrame(makeVector(0,1), subVect(makeVector(1,1), makeVector(0,1)),subVect(makeVector(0,0), makeVector(0,1)));
 //var map = frameMap(testf1);
 //paintTable(drawPoints(linetoPt(map(start),map(end))));
-//var ups = upsidedown(withFrame);
-//var ups = rotate90(rotate90(withFrame));
-//var ups = shrinkToUpper(withFrame);
-var ups0 = beside(withFrame,withFrame);
+//var ups = upsidedown(paintFrame);
+//var ups = rotate90(rotate90(paintFrame));
+//var ups = shrinkToUpper(paintFrame);
+var ups0 = beside(paintFrame,paintFrame);
 var ups1 = beside(eraseFrame,eraseFrame);
-var ups2 = below(withFrame,withFrame);
+var ups2 = below(paintFrame,paintFrame);
 var ups3 = below(eraseFrame,eraseFrame);
 //ups(testf);
-//withFrame(testf1);
+//paintFrame(testf1);
 
 var time = timing();
 var  t0 ={
@@ -87,7 +87,7 @@ time.timing.push(t0);
 time.timing.push(t1);
 time.timing.push(t2);
 time.timing.push(t3);
-time.executer(time.timing,0,true);
+//time.executer(time.timing,0,true);
 </script>
 
 </body>

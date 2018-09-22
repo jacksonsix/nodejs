@@ -81,7 +81,7 @@ function eraseLinesinFrame(lines){
 		lines.forEach(function(line){
 			let start = getstart(line);
 			let end = getend(line);
-			eraseTable(pointsToMatrix(linetoPt(map(start),map(end))));
+			paintTable(pointsToMatrix(linetoPt(map(start),map(end))),true);
 		});
 	}
 }
@@ -145,9 +145,7 @@ function pointsToMatrix(pts){
   return init;
 }
 
-function erasePonts(pts){
-	eraseTable(pointsToMatrix(pts));
-}
+
 function initTable() {
     var table = document.getElementById("paint");
 	for(var i =0;i<dots.height;i++){
@@ -215,7 +213,7 @@ function below(painter1,painter2){
 		paint_down(frame);
 	}
 }
-function paintTable(data){
+function paintTable(data,berase){
   var table = document.getElementById("paint");
   // data as matrix
   if(data ==null) return;
@@ -224,27 +222,17 @@ function paintTable(data){
 	for(var j=0;j<row.length;j++){
 		var cell = row[j];
 		if(cell == 1){
-		  table.rows[i].cells[j].innerText='X';
+			if(berase ){
+				 table.rows[i].cells[j].innerText='';
+			}else{
+				 table.rows[i].cells[j].innerText='X';
+			}		 
 		}
 	}
   }
   
 }
-function eraseTable(data){
-  var table = document.getElementById("paint");
-  // data as matrix
-  if(data ==null) return;
-  for(var i =0;i<data.length;i++){
-    var row = data[i];
-	for(var j=0;j<row.length;j++){
-		var cell = row[j];
-		if(cell == 1){
-		  table.rows[i].cells[j].innerText='';
-		}
-	}
-  }
-  
-}
+
 
 /// read write data a string.
 // data as matrix,  seperate by comma, end of line
