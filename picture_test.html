@@ -51,8 +51,9 @@ var paintFrame = paintLinesinFrame(lines);
 var eraseFrame = eraseLinesinFrame(lines);
 
 var testf = makeFrame(makeVector(0,0), makeVector(1,0),makeVector(0,1));
-paintFrame(testf);
+//paintFrame(testf);
 //eraseFrame(testf);
+
 //var testf1 = makeFrame(makeVector(0,1), subVect(makeVector(1,1), makeVector(0,1)),subVect(makeVector(0,0), makeVector(0,1)));
 //var map = frameMap(testf1);
 //paintTable(drawPoints(linetoPt(map(start),map(end))));
@@ -73,21 +74,21 @@ var  t0 ={
 };
 var t1 ={
 	proc:function(){ups1(testf);},
-	num: 2
+	num: 3
 };
 var t2 ={
 	proc:function(){ups2(testf);},
-	num: 4
+	num: 7
 };
 var t3 ={
 	proc:function(){ups3(testf);},
-	num: 8
+	num: 12
 };
 time.timing.push(t0);
 time.timing.push(t1);
 time.timing.push(t2);
 time.timing.push(t3);
-//time.executer(time.timing,0,true);
+time.executer(time.timing,0,true);
 </script>
 
 </body>

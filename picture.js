@@ -315,24 +315,20 @@ function timing(){
 	var result = {};
 	var timing =[];
 	function executer(timing,index,loop){
-		var evt = timing[index];
-		if(evt.proc != null){ 
-		    var mock = true;
-			if(mock && index>0){
-				var lastevt =timing[index-1];
-				var delay = evt.num - lastevt.num;
-				setTimeout(evt.proc,delay*1000);
-			}else{
-				evt.proc(); 
+		for(var i=0;i<timing.length;i++){
+			var evt = timing[i];
+			if(evt.proc != null){ 
+					var delay;
+					var lastevt =timing[i-1];
+					if(typeof lastevt ==='undefined'){
+						delay = evt.num ;
+					}else{
+						delay = evt.num - lastevt.num;
+					}				
+					setTimeout(evt.proc,delay*1000);			
 			}
-			
-		}
-		console.log(index);	
-		if(index + 1 < timing.length){			
-			executer(timing, index + 1,loop);
-		}else if(loop){			
-			setTimeout(function(){executer(timing, 0,loop); },2000);
-		}	
+			console.log(i);	
+			}
 
 	}
 	
