@@ -1,4 +1,7 @@
-
+// issue: when delete, it might delete overlap line.  
+// instroduce layer to solve this.     interface    drawTable  --->  drawLayer, LayerToTable
+// default layer =0,  
+ 
 /// frame begins here
 function makeFrame(startv,v1,v2){
   var frame ={};
