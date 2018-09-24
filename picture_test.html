@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -13,8 +14,13 @@ td{
 </head>
 <body>
 
-<button  onClick=savepicture()>save picture</button>
+<button  onClick=savebtn()>save picture</button>
 <div id='log'> </div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
 <script src="advanced.js"></script>
 
 
@@ -26,6 +32,8 @@ td{
 </script>
 <script>
 
+//readTextFile("file:///C:/_script/github/nodejs/picture_data/1.txt");
+//readFromService();
 initTable(dots.width,dots.height);
 var start ={};
 start.x =0.3;
@@ -42,10 +50,10 @@ var lines=[];
 lines.push(makeLine(start,end));
 lines.push(makeLine(start,end2));
 
-var ss = writestring(pointsToMatrix(linetoPt(start,end)));
-var dd = readstring(ss);
-var ss1 = writestring(dd);
-var dd1 = readstring(ss1);
+//var ss = writestring(pointsToMatrix(linetoPt(start,end)));
+//var dd = readstring(ss);
+//var ss1 = writestring(dd);
+//var dd1 = readstring(ss1);
 
 var paintFrame = paintLinesinFrame(lines);
 var eraseFrame = eraseLinesinFrame(lines);
@@ -69,19 +77,19 @@ var ups3 = below(eraseFrame,eraseFrame);
 
 var time = timing();
 var  t0 ={
-	proc:function(){ups0(testf);},
+	proc:function(){readFromService(1);},
 	num: 0
 };
 var t1 ={
-	proc:function(){ups1(testf);},
+	proc:function(){readFromService(2);},
 	num: 3
 };
 var t2 ={
-	proc:function(){ups2(testf);},
-	num: 7
+	proc:function(){readFromService(3);},
+	num: 7 
 };
 var t3 ={
-	proc:function(){ups3(testf);},
+	proc:function(){readFromService(1);},
 	num: 12
 };
 time.timing.push(t0);
