@@ -216,6 +216,8 @@ function below(painter1,painter2){
 		paint_down(frame);
 	}
 }
+///-> change to layer implementation
+
 function paintTable(data,berase){
   var table = document.getElementById("paint");
   // data as matrix
@@ -236,6 +238,7 @@ function paintTable(data,berase){
   
 }
 
+///<--
 
 /// read write data a string.
 // data as matrix,  seperate by comma, end of line
@@ -284,11 +287,39 @@ function writestring(data){
 }
 
 
+function readFromService(num)
+{
+	var d;
+    $.ajax({
+	  url: "http://localhost:3000/" + num,
+	
+	}).done(function(data) {
+	   var d= readstring(data);
+	   paintTable(d);
+	   setTimeout(() => {paintTable(d,true);},40);
+	});
+	
+}
+
+function writeToService(pdata)
+{
+	var d;
+    $.ajax({
+	  url: "http://localhost:3000/1",
+	  type: 'POST',
+	  data: pdata
+	}).done(function(data) {
+	   console.log('post to service');
+	});
+	
+}
+
 // ui click event;
 document.getElementById("paint").addEventListener("click", function( event ) {
     // display the current click count inside the clicked div
+	if(event.target.localName !=='td' ) return;
 	if(event.target.textContent ==='X'){
-	  event.target.textContent ='';
+	  event.target.textContent =' ';
 	}else{
 	  event.target.textContent = 'X';
 	}
@@ -311,6 +342,11 @@ function savepicture(){
   }
   return data;
 } 
+function savebtn(){
+	var data = savepicture();
+	var s = writestring(data);
+	writeToService(s);
+}
 
 //time axis
 // define spot 0,1,2,3...
@@ -322,9 +358,12 @@ function timing(){
 			var evt = timing[i];
 			if(evt.proc != null){ 
 					var 	delay = evt.num -  timing[0].num;								
-					setTimeout(evt.proc,delay*100);			
+					setTimeout(evt.proc,delay*50);			
 			}
 			console.log(i);	
+			if(i == timing.length-1) {
+				setTimeout(() =>{executer(timing,0,loop);}, 400);
+			}
 			}
 
 	}
