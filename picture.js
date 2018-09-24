@@ -143,7 +143,10 @@ function linetoPt(pt1,pt2){
 function pointsToMatrix(pts){
   var init = emptyData(dots.width,dots.height);
   pts.forEach(function(pt){
-    init[pt.y][pt.x] = 1;
+	if(pt.y >= dots.height || pt.x >=dots.width) {		
+	}else{
+		 init[pt.y][pt.x] = 1;
+	} 
   });
   return init;
 }
@@ -214,6 +217,15 @@ function below(painter1,painter2){
 	return function(frame){
 		paint_up(frame);
 		paint_down(frame);
+	}
+}
+
+function moveTo(painter,startx,starty){
+	let orgin = makeVector(startx,starty);
+	let paint_new = transform(painter,orgin,makeVector(startx+1,starty),makeVector(startx,starty+1));
+	
+	return function(frame){
+		paint_new(frame);
 	}
 }
 ///-> change to layer implementation
